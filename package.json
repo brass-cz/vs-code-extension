@@ -13,9 +13,59 @@
   "categories": [
     "Programming Languages"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onLanguage:prepoly"
+  ],
   "main": "./dist/extension.js",
-  "contributes": {},
+  "contributes": {
+    "languages": [
+      {
+        "id": "prepoly",
+        "aliases": [
+          "prepoly"
+        ],
+        "extensions": [
+          ".pp"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "prepoly.restartServer",
+        "title": "Restart Language Server",
+        "category": "prepoly"
+      }
+    ],
+    "configuration": {
+      "title": "prepoly",
+      "properties": {
+        "prepoly.server.path": {
+          "type": "string",
+          "default": "",
+          "description": "Command used to start the prepoly language server. Leave empty to use `ppm lsp` from PATH."
+        },
+        "prepoly.server.args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Arguments passed to the server command when prepoly.server.path is set (e.g. [\"lsp\"] for ppm)."
+        },
+        "prepoly.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the prepoly language server."
+        }
+      }
+    }
+  },
   "scripts": {
     "vscode:prepublish": "pnpm run package",
     "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
