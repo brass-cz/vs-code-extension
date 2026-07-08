@@ -3,10 +3,13 @@
   "displayName": "prepoly VS Code extension",
   "description": "VS Code extension for prepoly development",
   "version": "0.1.0",
+  "author": "cordx56 <cord@x56.cx>",
+  "publisher": "cordx56",
   "repository": {
     "type": "git",
     "url": "https://github.com/prepoly/vs-code-extension"
   },
+  "license": "MIT",
   "engines": {
     "vscode": "^1.125.0"
   },
