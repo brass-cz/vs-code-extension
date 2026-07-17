@@ -7,15 +7,15 @@ import {
   LanguageClientOptions,
 } from "vscode-languageclient/node";
 
-const INSTALL_GUIDE_URL = "https://prepoly.56.ax/installation/quick/";
+const INSTALL_GUIDE_URL = "https://brass-lang.cz/installation/quick/";
 
 let client: LanguageClient | undefined;
 
-// Resolves how to launch the server. `ppm lsp` enables package resolution
+// Resolves how to launch the server. `czpm lsp` enables package resolution
 // only when its cwd contains a package.toml (and starts without resolution
-// otherwise), so prefer the workspace folder that is a ppm package as cwd.
+// otherwise), so prefer the workspace folder that is a czpm package as cwd.
 function serverOptions(): Executable {
-  const config = vscode.workspace.getConfiguration("prepoly.server");
+  const config = vscode.workspace.getConfiguration("brass.server");
   const serverPath = config.get<string>("path", "");
   if (serverPath !== "") {
     return { command: serverPath, args: config.get<string[]>("args", []) };
@@ -29,7 +29,7 @@ function serverOptions(): Executable {
       fs.existsSync(path.join(folder.uri.fsPath, "package.toml")),
     ) ?? folders[0];
   return {
-    command: "ppm",
+    command: "czpm",
     args: ["lsp"],
     options: packageRoot ? { cwd: packageRoot.uri.fsPath } : undefined,
   };
@@ -39,16 +39,16 @@ async function startClient(): Promise<void> {
   const server = serverOptions();
   const clientOptions: LanguageClientOptions = {
     documentSelector: [
-      { scheme: "file", language: "prepoly" },
-      { scheme: "untitled", language: "prepoly" },
+      { scheme: "file", language: "brass" },
+      { scheme: "untitled", language: "brass" },
     ],
   };
 
-  // The client id "prepoly" ties the trace output to the
-  // `prepoly.trace.server` setting contributed in package.json.
+  // The client id "brass" ties the trace output to the
+  // `brass.trace.server` setting contributed in package.json.
   client = new LanguageClient(
-    "prepoly",
-    "prepoly Language Server",
+    "brass",
+    "Brass Language Server",
     server,
     clientOptions,
   );
@@ -58,8 +58,8 @@ async function startClient(): Promise<void> {
   } catch {
     client = undefined;
     const selected = await vscode.window.showErrorMessage(
-      `Failed to start the prepoly language server (command: ${server.command}). ` +
-        "Install the prepoly toolchain or adjust the prepoly.server settings.",
+      `Failed to start the Brass language server (command: ${server.command}). ` +
+        "Install the Brass toolchain or adjust the brass.server settings.",
       "Open install guide",
     );
     if (selected === "Open install guide") {
@@ -78,10 +78,10 @@ async function restartClient(): Promise<void> {
 
 export async function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand("prepoly.restartServer", restartClient),
+    vscode.commands.registerCommand("brass.restartServer", restartClient),
     // Server settings only take effect on (re)start, so restart on change.
     vscode.workspace.onDidChangeConfiguration((event) => {
-      if (event.affectsConfiguration("prepoly.server")) {
+      if (event.affectsConfiguration("brass.server")) {
         void restartClient();
       }
     }),

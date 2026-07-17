@@ -1,13 +1,13 @@
 {
-  "name": "prepoly-vs-code-extension",
-  "displayName": "prepoly VS Code extension",
-  "description": "VS Code extension for prepoly development",
+  "name": "brass-vs-code-extension",
+  "displayName": "Brass VS Code extension",
+  "description": "VS Code extension for Brass development",
   "version": "0.1.0",
   "author": "cordx56 <cord@x56.cx>",
   "publisher": "cordx56",
   "repository": {
     "type": "git",
-    "url": "https://github.com/prepoly/vs-code-extension"
+    "url": "https://github.com/brass-cz/brass"
   },
   "license": "MIT",
   "engines": {
@@ -17,46 +17,46 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onLanguage:prepoly"
+    "onLanguage:brass"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "languages": [
       {
-        "id": "prepoly",
+        "id": "brass",
         "aliases": [
-          "prepoly"
+          "Brass"
         ],
         "extensions": [
-          ".pp"
+          ".cz"
         ],
         "configuration": "./language-configuration.json"
       }
     ],
     "commands": [
       {
-        "command": "prepoly.restartServer",
+        "command": "brass.restartServer",
         "title": "Restart Language Server",
-        "category": "prepoly"
+        "category": "Brass"
       }
     ],
     "configuration": {
-      "title": "prepoly",
+      "title": "Brass",
       "properties": {
-        "prepoly.server.path": {
+        "brass.server.path": {
           "type": "string",
           "default": "",
-          "description": "Command used to start the prepoly language server. Leave empty to use `ppm lsp` from PATH."
+          "description": "Command used to start the Brass language server. Leave empty to use `czpm lsp` from PATH."
         },
-        "prepoly.server.args": {
+        "brass.server.args": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "default": [],
-          "description": "Arguments passed to the server command when prepoly.server.path is set (e.g. [\"lsp\"] for ppm)."
+          "description": "Arguments passed to the server command when brass.server.path is set (e.g. [\"lsp\"] for czpm)."
         },
-        "prepoly.trace.server": {
+        "brass.trace.server": {
           "type": "string",
           "enum": [
             "off",
@@ -64,7 +64,7 @@
             "verbose"
           ],
           "default": "off",
-          "description": "Traces the communication between VS Code and the prepoly language server."
+          "description": "Traces the communication between VS Code and the Brass language server."
         }
       }
     }
