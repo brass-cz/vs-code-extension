@@ -2,7 +2,7 @@
   "name": "brass-vs-code-extension",
   "displayName": "Brass VS Code extension",
   "description": "VS Code extension for Brass development",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "cordx56 <cord@x56.cx>",
   "publisher": "cordx56",
   "repository": {
