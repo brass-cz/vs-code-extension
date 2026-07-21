@@ -1,0 +1,46 @@
+name: Release to Registries
+
+on:
+  release:
+    types:
+      - released
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  vscode-release:
+    name: Create Vscode Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Setup PNPM And Install dependencies
+        uses: pnpm/action-setup@v6
+      - name: Release vsce
+        run: |
+          pnpm vsce publish --no-dependencies
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+  vscodium-release:
+    name: Create Vscodium Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Setup PNPM And Install dependencies
+        uses: pnpm/action-setup@v6
+      - name: Release ovsx
+        run: |
+          pnpm ovsx publish --no-dependencies
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}

@@ -1,5 +1,5 @@
 {
-  "name": "brass-vs-code-extension",
+  "name": "brass-extension",
   "displayName": "Brass VS Code extension",
   "description": "VS Code extension for Brass development",
   "version": "0.2.1",
@@ -87,6 +87,7 @@
     "lint": "eslint src",
     "test": "vscode-test",
     "build": "vsce package --no-dependencies",
+    "publish": "vsce publish --no-dependencies",
     "fmt": "prettier -w src"
   },
   "devDependencies": {
