@@ -7,7 +7,7 @@ import {
   LanguageClientOptions,
 } from "vscode-languageclient/node";
 
-const INSTALL_GUIDE_URL = "https://brass-lang.cz/installation/quick/";
+const INSTALL_GUIDE_URL = "https://brass-cz.org/installation/quick/";
 
 let client: LanguageClient | undefined;
 
